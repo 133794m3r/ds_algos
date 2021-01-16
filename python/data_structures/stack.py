@@ -8,9 +8,9 @@ class Stack:
 		output = "{"
 		tmp = self._first
 		for i in range(self._size):
-			output += f" |value:{tmp.value} next:{tmp.next} | "
+			output += f"|value:{tmp.value} next:{tmp.next} |"
 			if i < self._size -1:
-				output+=','
+				output+=', '
 			tmp = tmp.next
 		output+= "}"
 		return output
@@ -21,7 +21,7 @@ class Stack:
 			self._last = None
 			self._size = 0
 		else:
-			self._first = self.Node(items[0], self._first)
+			self._first = self.Node(items[0])
 			self._last = self._first
 			for item in items[1:]:
 				self._first = self.Node(item, self._first)
@@ -54,7 +54,8 @@ def main():
 	popped = stack.pop()
 	print(popped)
 	print(stack)
-
+	stack2 = Stack(('A','B','C'))
+	print(stack2)
 
 if __name__ == "__main__":
 	main()

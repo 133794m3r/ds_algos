@@ -12,5 +12,7 @@ int main() {
 	std::cout << hashtable.values();
 	hashtable.set("b",100);
 	std::cout << hashtable.values();
+	hashtable.remove("a");
+	std::cout << hashtable.values();
 }
 

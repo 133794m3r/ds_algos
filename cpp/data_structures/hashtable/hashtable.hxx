@@ -73,7 +73,17 @@ template <typename T> class HashTable{
 		}
 		return res;
 	}
+	void remove(const std::string &key){
+		size_t idx = hash_func(key);
+		for(size_t i=0;i<buckets_[idx].size();i++){
+			if(buckets_[idx][i]->key == key){
+				Node *tmp = buckets_[idx][i];
+				buckets_[idx].erase(buckets_[idx].begin()+i);
+				delete tmp;
+			}
+		}
 
+	}
 	std::vector<T> values(){
 		std::vector<T> res;
 		res.reserve(num_buckets);
@@ -85,6 +95,15 @@ template <typename T> class HashTable{
 			}
 		}
 		return res;
+	}
+	~HashTable(){
+		for(size_t i=0;i<num_buckets;i++){
+			for(size_t j=0;j<buckets_[i].size();j++){
+				delete buckets_[i][j];
+			}
+			buckets_[i].clear();
+		}
+		buckets_.clear();
 	}
 	
 };

@@ -36,7 +36,7 @@ class MaxBinaryHeap:
 		self._size += 1
 		self.shift_up()
 
-	def get_max(self):
+	def extract_max(self):
 		removed = None
 		if self._size > 0:
 			removed = self._values[0]
@@ -47,7 +47,7 @@ class MaxBinaryHeap:
 		
 		return removed
 
-	def max(self):
+	def get_max(self):
 		if self._size > 0:
 			return self._values[0]
 		else:

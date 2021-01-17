@@ -1,0 +1,44 @@
+#include <algorithm>
+#include <iostream>
+#include "sort_algos.hxx"
+template <typename T, typename N> void print_arr(T *arr, N n) {
+	N i;
+	std::cout << "[";
+	for (i=0; i < n; i++){
+		if(i > 0)
+			std::cout << ",";
+		std::cout << arr[i];
+	}
+	std::cout << "]" << std::endl;
+}
+
+int main(){
+	unsigned long long arr[10]={10,9,8,7,1,2,3,4,5,6};
+	unsigned long long arr2[10] = {10,9,8,7,1,2,3,4,5,6};
+	std::vector<int> vec={3,4,5,6,7,1,2,8,9,10};
+	std::vector<int> vec2 = vec;
+	print_arr(arr,10);
+	bubble_sort(arr,10);
+	print_arr(arr,10);
+	std::cout << vec;
+	bubble_sort(vec);
+	std::cout << vec;
+	vec = vec2;
+	std::cout << "merge " << std::endl;
+	merge_sort(vec);
+	std::cout << vec << std::endl;
+	std::cout << "merge arr" << std::endl;
+	merge_sort(arr2,10);
+	print_arr(arr2,10);
+	unsigned long arr3[10]={10,8,5,100,1023,2013,3012,1111,22,33};
+
+	radix_sort(arr3,10);
+	std::cout << "[";
+	for(int i=0;i<10;i++){
+		std::cout << arr3[i];
+		if(i != 9)
+			std::cout << ", ";
+	}
+	std::cout << "]" << std::endl;
+	return 0;
+}

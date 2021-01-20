@@ -80,7 +80,7 @@ class LinkedList:
 
 	def pop(self):
 		if self._head is None:
-			return -1
+			return None
 		prev = self.get(self._length-2)
 		popped = self._tail.value
 		self._tail=prev

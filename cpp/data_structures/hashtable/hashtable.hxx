@@ -28,10 +28,14 @@ template <typename T> class HashTable{
 		return hash % num_buckets;
 	}
   public:
-	explicit HashTable(size_t bucket_count=65){
+	explicit HashTable(size_t bucket_count=269){
+		//make sure that the number of buckets is at least somewhat prime to reduce collisions.
+		if(!(numbuckets & 1))
+			num_buckets += 1
 		num_buckets = bucket_count;
 		buckets_.resize(num_buckets);
 	}
+	
 	void set(const std::string &key, T value){
 		size_t idx = hash_func(key);
 		for(Node *node:buckets_[idx]){
@@ -42,6 +46,7 @@ template <typename T> class HashTable{
 		}
 		buckets_[idx].push_back(new Node(key, value));
 	}
+	
 	T get(const std::string &key){
 		size_t idx = hash_func(key);
 		if(buckets_[idx].size() == 0){

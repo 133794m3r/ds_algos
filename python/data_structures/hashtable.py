@@ -13,7 +13,7 @@ class HashTable:
 		return str(self._buckets)
 
 
-	def __init__(self,num_buckets = 65):
+	def __init__(self,num_buckets = 263):
 		self._num_buckets = num_buckets
 		self._buckets = [ [] for _ in range(num_buckets)]
 

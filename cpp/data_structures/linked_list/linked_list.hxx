@@ -1,5 +1,5 @@
-#ifndef PROG_ASSIGNMENT_LINKEDLIST_HXX
-#define PROG_ASSIGNMENT_LINKEDLIST_HXX
+#ifndef _LINKEDLIST_HXX
+#define _LINKEDLIST_HXX
 #include <vector>
 #include <iostream>
 
@@ -26,12 +26,12 @@ template<typename T> class LinkedList {
 		length_ = 0;
 	}
 
-	LinkedList(T *A, long long n) {
+	LinkedList(T *A, size_t n) {
 		head_ = new Node(A[0]);
 		tail_ = head_;
 		length_ = 1;
 		Node *tmp, *last=head_;
-		for (unsigned long long i = 1; i < n; i++) {
+		for (size_t i = 1; i < n; i++) {
 			tmp = new Node(A[i]);
 			last->next = tmp;
 			last = tmp;
@@ -70,12 +70,24 @@ template<typename T> class LinkedList {
 		Node *p = get(idx);
 		p->data = val;
 	}
-
+	long long find(T key){
+		Node *cur = head_;
+		for(long long i=0;i<length_;i++){
+			if(cur->data == key){
+				return i;
+			}
+			cur = cur->next;
+		}
+		return -1;
+	}
 	//to let them get a specific element in a normal way.
 	//won't let them set the value here because that's too complex to do.
 	T operator[](long long idx){
 		Node *tmp = this->get(idx);
-		return tmp->data;
+		if(tmp != nullptr)
+			return tmp->data;
+		else
+			return 0;
 	}
 
 	void insert(long long idx,T val){
@@ -103,7 +115,7 @@ template<typename T> class LinkedList {
 
 	void push(T val){
 		if(!head_){
-			head_->data = val;
+			head_ = new Node(val);
 			tail_ = head_;
 		}
 		else{
@@ -218,7 +230,9 @@ template<typename T> class LinkedList {
 			}
 		}
 	}
-
+	size_t length(){
+		return this->length_;
+	}
 	LinkedList<T> operator+(const LinkedList<T> &second_list) const{
 		LinkedList<T> *ret = this;
 		ret->append(second_list);
@@ -247,4 +261,4 @@ template<typename T> class LinkedList {
 };
 
 
-#endif //PROG_ASSIGNMENT_LINKEDLIST_HXX
+#endif //_LINKEDLIST_HXX

@@ -71,7 +71,7 @@ template<typename T> class DoublyLinkedList {
 		}
 		else{
 			long long i = length_ -1;
-			*current = tail_;
+			current = tail_;
 			while(i != idx){
 				current = current->prev;
 				i--;
@@ -123,8 +123,8 @@ template<typename T> class DoublyLinkedList {
 	}
 
 	void push(T val){
-		if(!head_){
-			head_->data = val;
+		if(head_ == nullptr){
+			head_ = new Node(val);
 			tail_ = head_;
 		}
 		else{
@@ -136,7 +136,7 @@ template<typename T> class DoublyLinkedList {
 	}
 
 	void shift(){
-		if(!head_){
+		if(head_ == nullptr){
 			return;
 		}
 		Node *cur_head = head_;
@@ -150,7 +150,7 @@ template<typename T> class DoublyLinkedList {
 	}
 
 	void unshift(T val){
-		if(!head_){
+		if(head_ == nullptr){
 			head_ = new Node(val);
 			tail_ = head_;
 		}
@@ -183,7 +183,7 @@ template<typename T> class DoublyLinkedList {
 
 	T pop(){
 		if(head_ == nullptr){
-			return -1;
+			return static_cast<T>(NULL);
 		}
 
 		Node *tmp = tail_->prev;
@@ -191,7 +191,7 @@ template<typename T> class DoublyLinkedList {
 			head_=tail_=nullptr;
 		}
 		else {
-			delete (tail_);
+			delete (tail_->next);
 			tail_=tmp;
 			tail_->next = nullptr;
 		}
@@ -248,7 +248,19 @@ template<typename T> class DoublyLinkedList {
 			}
 		}
 	}
-
+	long long find(T key){
+		Node *cur = head_;
+		for(long long i=0;i<length_;i++){
+			if(cur->data == key){
+				return i;
+			}
+			cur = cur->next;
+		}
+		return -1;
+	}
+	size_t length(){
+		return this->length_;
+	}
 	DoublyLinkedList<T> operator+(const DoublyLinkedList<T> &second_list) const{
 		DoublyLinkedList<T> *ret = this;
 		ret->append(second_list);

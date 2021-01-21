@@ -1,11 +1,11 @@
-#ifndef PROG_ASSIGNMENT_STACK_HXX
-#define PROG_ASSIGNMENT_STACK_HXX
+#ifndef _STACK_HXX
+#define _STACK_HXX
 #include <cstddef>
 #include <iostream>
 #include "../basic_node.hxx"
 
 template <typename T> class Stack;
-template <typename T> std::ostream &operator<<(std::ostream &, const Stack<T> &);
+template <typename T> std::ostream &operator<<(std::ostream &os, const Stack<T> &s);
 
 
 template <typename T> class Stack{
@@ -27,9 +27,11 @@ template <typename T> class Stack{
 		}
 		size_ = n;
 	}
-
+	unsigned long size(){
+		return size_;
+	}
 	unsigned long push(T value){
-		if(!first_){
+		if(first_ == nullptr){
 			first_ = new Node<T>(value);
 			last_ = first_;
 		}
@@ -40,21 +42,21 @@ template <typename T> class Stack{
 	}
 
 	T pop(){
-		if(!first_){
+		if(first_ == nullptr){
 			return 0;
-		}
-		if(first_ == last_){
-			last_  = 0;
 		}
 		Node<T> *tmp = first_;
 		first_ = first_->next;
 		size_--;
+		if(size_ == 0){
+			first_ = last_ = nullptr;
+		}
 		T val = tmp->value;
 		delete(tmp);
 		return val;
 	}
 
-	friend std::ostream &operator<<(std::ostream &, const Stack<T> &);
+	friend std::ostream &operator<< <>(std::ostream &os, const Stack<T> &s);
 
 	~Stack(){
 		Node<T> *nxt = first_;
@@ -86,7 +88,7 @@ template <typename T> std::ostream &operator<<(std::ostream &os, const Stack<T> 
 	return os;
 }
 
-std::ostream &operator<<(std::ostream &os, const Stack<char> &s) {
+template <typename T=char> std::ostream &operator<<(std::ostream &os, const Stack<char> &s) {
 	std::cout << "{" << std::endl;
 	Node<char> *tmp = s.first_;
 	for(size_t i=0;i<s.size_;i++){
@@ -102,4 +104,4 @@ std::ostream &operator<<(std::ostream &os, const Stack<char> &s) {
 
 
 
-#endif //PROG_ASSIGNMENT_STACK_HXX
+#endif //_STACK_HXX

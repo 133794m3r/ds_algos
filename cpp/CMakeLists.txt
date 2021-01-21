@@ -44,3 +44,7 @@ add_executable(bst
 add_executable(hashtable
 		data_structures/hashtable/hashtable.hxx
 		data_structures/hashtable/hashtable.cpp)
+
+add_executable(graph
+		data_structures/graph/graph.cpp
+		data_structures/graph/graph.hxx)

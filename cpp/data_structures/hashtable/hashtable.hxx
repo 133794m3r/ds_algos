@@ -19,7 +19,7 @@ template <typename T> class HashTable{
 		}
 	};
 	std::vector<std::vector<Node*>> buckets_;
-	size_t hash_func(const std::string &s) const{
+	[[nodiscard]] size_t hash_func(const std::string &s) const{
 		size_t prime = 1000000007;
 		size_t multiplier = 263;
 		size_t hash = 0;
@@ -30,8 +30,8 @@ template <typename T> class HashTable{
   public:
 	explicit HashTable(size_t bucket_count=269){
 		//make sure that the number of buckets is at least somewhat prime to reduce collisions.
-		if(!(numbuckets & 1))
-			num_buckets += 1
+		if(!(bucket_count & 1))
+			num_buckets += 1;
 		num_buckets = bucket_count;
 		buckets_.resize(num_buckets);
 	}

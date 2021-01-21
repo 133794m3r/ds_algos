@@ -37,14 +37,24 @@ add_executable(stack_test
 		data_structures/stack/stack.hxx
 		data_structures/stack/stack.cpp)
 
-add_executable(bst
+add_executable(bst_test
 		data_structures/binary_search_tree/bst.cpp
 		data_structures/binary_search_tree/bst.hxx)
 
-add_executable(hashtable
+add_executable(hashtable_test
 		data_structures/hashtable/hashtable.hxx
 		data_structures/hashtable/hashtable.cpp)
 
-add_executable(graph
+add_executable(graph_test
 		data_structures/graph/graph.cpp
 		data_structures/graph/graph.hxx)
+
+add_executable(max_heap_test
+		data_structures/heaps/maxbinary.cpp data_structures/heaps/maxbinary.hxx)
+
+add_executable(priority_q_test
+		data_structures/priority_q/priorityq.cpp data_structures/priority_q/priorityq.hxx)
+# algorithms
+add_executable(dijsktra_test
+		algos/pathfinding/dijkstra/dijkstra.cpp
+		algos/pathfinding/dijkstra/dijkstra.hxx)

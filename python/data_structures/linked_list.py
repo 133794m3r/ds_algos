@@ -131,9 +131,11 @@ class LinkedList:
 	def shift(self):
 		if self._head:
 			tmp = self._head
-			self._head, self._head.ref = tmp.ref, None
-
+			self._head = tmp.ref
 			self._length -= 1
+			if self._length == 0:
+				self._tail = None
+			return tmp;
 		else:
 			return None
 

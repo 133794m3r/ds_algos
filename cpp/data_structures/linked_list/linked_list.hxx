@@ -174,12 +174,17 @@ template<typename T> class LinkedList {
 		if(head_ == nullptr){
 			return -1;
 		}
-		Node *prev = get(length_-2);
 		T pop_val = tail_->data;
-		tail_=prev;
-		delete(prev->next);
-		tail_->next= nullptr;
 		length_--;
+		if(length_ > 1){
+			Node *prev = get(length_-2);
+			tail_=prev;			
+			delete(prev->next);
+			tail_->next= nullptr;			
+		}
+		else{
+			tail_ = nullptr;
+		}		
 		return pop_val;
 	}
 

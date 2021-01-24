@@ -81,15 +81,19 @@ class LinkedList:
 	def pop(self):
 		if self._head is None:
 			return None
-		prev = self.get(self._length-2)
-		popped = self._tail.value
-		self._tail=prev
-		self._tail.ref = None
+		popped = self._tail.value			
+		if self._length > 1:
+			prev = self.get(self._length-2)
+			self._tail=prev
+			self._tail.ref = None
+		else:
+			self._tail = None
 		self._length-=1
 		return popped
 
 	def get(self, idx):
-		if idx < 0 or  idx > self._length:
+		#if idx < 0 or  idx > self._length:
+		if 0 > idx > self._length:
 			return None
 		cur = self._head
 		for i in range(idx):
@@ -106,12 +110,14 @@ class LinkedList:
 			self.push(value)
 		elif idx == 0:
 			self._head = self.Node(value, self._head)
+		elif idx == self._length:
+			self.push(value);
 		else:
 			prev = self.get(idx - 1)
-			p = self.Node(value, prev.ref)
-			prev.ref = p
-			if idx == self._length:
-				self._tail = p
+			prev.ref = self.Node(value, prev.ref)
+			#prev.ref = p
+			#if idx == self._length:
+				#self._tail = p
 
 		self._length += 1
 

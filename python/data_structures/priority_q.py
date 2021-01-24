@@ -15,9 +15,16 @@ class PriorityQueue:
 		def __ge__(self, other):
 			return self.__gt__(other) or self.__eq__(other)
 
+		# repr is just for debug purposes.
+		def __repr__(self):
+			return f'{self.value}:{self.priority}'
+
 	def __init__(self):
 		self._values = []
 		self._size = 0
+
+	def __len__(self):
+		return self._size
 
 	def __str__(self):
 		return { str(p): v for p,v in self._values }
@@ -43,7 +50,6 @@ class PriorityQueue:
 		self._size += 1
 		self.shift_up()
 
-
 	def dequeue(self):
 		highest = None
 		if self._size > 0:
@@ -56,20 +62,35 @@ class PriorityQueue:
 		return highest
 
 	def shift_down(self):
-		el = self._values[0]
 		idx = 0
-		heap_size = self._size
-		while idx < heap_size:
+		while True:
 			swap_id = idx
 			left = (idx << 1) + 1
 			right = left+1
 			if left < self._size:
-				if self._values[left] < el:
+				if self._values[left] < self._values[idx]:
 					swap_id = left
-			if right < self._size and self._values[swap_id] < self._values[right]:
+			if right < self._size and self._values[swap_id] > self._values[right]:
 						swap_id = right
 
 			if swap_id == idx: break
 
-			self._values[idx], self._values[swap_id] = self._values[swap_id], el
+			self._values[idx], self._values[swap_id] = self._values[swap_id], self._values[idx]
 			idx = swap_id
+
+
+if __name__ == "__main__":
+	pq = PriorityQueue()
+	#close enough to infinity for testing purposes.
+	inf = 1<<64
+	pq.enqueue("a",0)
+	pq.enqueue("b",inf)
+	pq.enqueue("c",inf)
+	pq.enqueue("d",inf)
+	pq.enqueue("e",inf)
+	pq.enqueue("f",inf)
+	pq.dequeue()
+	pq.enqueue("b",4)
+	pq.enqueue("c",2)
+	pq.dequeue()
+	pq.enqueue("d",4)

@@ -1,5 +1,5 @@
-#ifndef PROG_ASSIGNMENT_BST_HXX
-#define PROG_ASSIGNMENT_BST_HXX
+#ifndef _BST_HXX
+#define _BST_HXX
 //Using STL's queue instead of my own as no reason to use it.
 #include <queue>
 #include <vector>
@@ -220,4 +220,4 @@ template <typename T> class BinarySearchTree {
 };
 
 
-#endif //PROG_ASSIGNMENT_BST_HXX
+#endif //_BST_HXX

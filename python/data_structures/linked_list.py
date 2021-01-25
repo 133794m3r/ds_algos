@@ -51,8 +51,10 @@ class LinkedList:
 
 	def __reversed__(self):
 		cur = self._head
+		self._head = self._tail
 		self._tail = cur
 		prev = None
+
 		while cur is not None:
 			ref = cur.ref
 			cur.ref = prev
@@ -102,7 +104,7 @@ class LinkedList:
 		return cur
 
 	def insert(self, idx, value):
-		if 0 < idx or idx > self._length:
+		if 0 > idx  > self._length:
 			return None
 		elif self._head is None:
 			self._head = self.Node(value)
@@ -110,8 +112,6 @@ class LinkedList:
 			self.push(value)
 		elif idx == 0:
 			self._head = self.Node(value, self._head)
-		elif idx == self._length:
-			self.push(value);
 		else:
 			prev = self.get(idx - 1)
 			prev.ref = self.Node(value, prev.ref)
@@ -165,12 +165,26 @@ class LinkedList:
 
 
 if __name__ == "__main__":
-	ll = LinkedList([1,2,3])
+	ll = LinkedList()
 	ll.push(4)
-	print(len(ll))
+	ll.push(5)
+	ll.push(6)
+	ll.insert(2,222)
+	ll.push(7)
+	ll.push(8)
+	ll.push(9)
+	ll.push(10)
 	print(ll)
-	print(ll.get(len(ll)-2))
+	ll.rev()
 	ll.pop()
+	ll.set(2,100)
 	print(ll)
-	ll.remove(1)
+	ll.insert(5,555)
+	ll.insert(4,444)
+	print(ll)
+	ll.shift()
+	print(ll)
+	ll.unshift(6)
+	print(ll)
+	ll.remove(5)
 	print(ll)

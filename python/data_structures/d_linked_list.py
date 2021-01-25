@@ -44,24 +44,25 @@ class DoublyLinkedList:
 		output += "]"
 		return output
 
-	def __repr__(self):
-		# Will actually make one later on.
-		return repr(self._head)
+	# def __repr__(self):
+	# 	# Will actually make one later on.
+	# 	//return repr(self._head)
+
 
 
 	def __reversed__(self):
 		cur = self._head
-		self._tail = cur
+		self._head = self._tail
+		self._tail =cur
 		prev = None
 		nxt = None
 		while cur is not None:
 			nxt  = cur.nxt
 			cur.nxt = prev
+			cur.prev = nxt
 			prev = cur
 			cur = nxt
 
-		self._head = prev
-		self._tail.nxt = None
 
 	def __len__(self):
 		return self._length
@@ -71,36 +72,46 @@ class DoublyLinkedList:
 			self._head = self.Node(value)
 			self._tail = self._head
 		else:
-			cur = self._head
-			while cur.nxt is not None:
-				cur = cur.nxt
-			cur.nxt = self.Node(value)
-
-			self._tail = cur.nxt
+			p = self.Node(value,self._tail)
+			self._tail.nxt = p
+			self._tail = p
 
 		self._length += 1
 
 	def pop(self):
 		if self._head is None:
 			return -1
-		prev = self.get(self._length-2)
-		popped = self._tail.value
-		self._tail=prev
-		self._tail.nxt = None
+		popped = self._tail
+		if self._length == 1:
+			self._head = self._tail = None
+		else:
+			self._tail=popped.prev
+			self._tail.nxt = None
+
 		self._length-=1
-		return popped
+		return popped.value
 
 	def get(self, idx):
 		if idx < 0 or  idx > self._length:
 			return None
 		cur = self._head
-		for i in range(idx):
-			cur = cur.nxt
-
+		# for i in range(idx):
+		# 	cur = cur.nxt
+		if idx <= (self._length//2):
+			i = 0
+			while i != idx:
+				cur = cur.nxt
+				i+=1
+		else:
+			i = self._length - 1
+			cur = self._tail
+			while i != idx:
+				cur = cur.prev
+				i-=1
 		return cur
 
 	def insert(self, idx, value):
-		if 0 < idx or idx > self._length:
+		if 0 > idx > self._length:
 			return None
 		elif self._head is None:
 			self._head = self.Node(value)
@@ -109,11 +120,14 @@ class DoublyLinkedList:
 		elif idx == 0:
 			self._head = self.Node(value, self._head)
 		else:
-			prev = self.get(idx - 1)
-			new_node = self.Node(value, prev, prev.nxt)
-			prev.nxt = new_node
-			if idx == self._length:
-				self._tail = new_node
+			cur = self.get(idx)
+			# need 2 pointers since Python doesn't actually
+			# update the pointers the way you'd think it would.
+			old_prev = cur.prev
+			new_node = self.Node(value, old_prev, cur)
+			old_prev.nxt = new_node
+			cur.prev = new_node
+
 
 		self._length += 1
 
@@ -127,7 +141,8 @@ class DoublyLinkedList:
 	def shift(self):
 		if self._head:
 			tmp = self._head
-			self._head, self._head.nxt = tmp.nxt, None
+			self._head = tmp.nxt
+			self._head.prev = None
 			self._length -= 1
 			if self._length == 0:
 				self._tail = 0
@@ -161,14 +176,21 @@ class DoublyLinkedList:
 
 
 if __name__ == "__main__":
-	ll = DoublyLinkedList([1, 2, 3])
+	ll = DoublyLinkedList()
 	ll.push(4)
-	print(len(ll))
-	print(ll)
+	ll.push(5)
+	ll.push(6)
+	ll.insert(2,222)
+	ll.push(7)
+	ll.push(8)
+	ll.push(9)
+	ll.push(10)
 	ll.rev()
-	print(ll)
-	print(ll.get(len(ll)-2))
 	ll.pop()
-	print(ll)
-	ll.remove(1)
+	ll.set(2,100)
+	ll.insert(5,555)
+	ll.insert(4,444)
+	ll.shift()
+	ll.unshift(6)
+	ll.remove(5)
 	print(ll)

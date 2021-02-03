@@ -10,6 +10,7 @@ int main(){
 	bst1.insert(20);
 	std::vector<int> tmp = bst1.bfs();
 	auto sz = tmp.size();
+	std::cout << "bfs" << std::endl;
 	std::cout << "[";
 	for(unsigned long i=0;i<sz;++i){
 		std::cout << tmp[i];
@@ -19,6 +20,7 @@ int main(){
 	}
 	std::cout << "]" << std::endl;
 	std::vector<int> dfs = bst1.pre_order();
+	std::cout << "pre" << std::endl;
 	std::cout << "[";
 	for(unsigned long i=0;i<sz;++i){
 		std::cout << dfs[i];

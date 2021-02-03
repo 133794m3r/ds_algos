@@ -1,6 +1,6 @@
 #ifndef _BST_HXX
 #define _BST_HXX
-//Using STL's queue instead of my own as no reason to use it.
+//Using STL's queue instead of my own as no reason to use it when theirs is likely better than my own in terms of perf.
 #include <queue>
 #include <vector>
 template <typename T> class BinarySearchTree {

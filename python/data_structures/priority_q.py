@@ -26,13 +26,13 @@ class PriorityQueue:
 	def __len__(self):
 		return self._size
 
-	def __str__(self):
-		return { str(p): v for p,v in self._values }
+	#def __str__(self):
+	#	return { str(p): v for p,v in self._values }
 
 	def __repr__(self):
 		tmp = ''
 		for i,v in enumerate(self._values):
-			tmp += f'{v.val}:{v.priority}'
+			tmp += f'{v.value}:{v.priority}'
 			if i < self._size:
 				tmp += ', '
 		return tmp
@@ -82,7 +82,7 @@ class PriorityQueue:
 if __name__ == "__main__":
 	pq = PriorityQueue()
 	#close enough to infinity for testing purposes.
-	inf = 1<<64
+	inf = (1<<64)-1
 	pq.enqueue("a",0)
 	pq.enqueue("b",inf)
 	pq.enqueue("c",inf)
@@ -92,5 +92,8 @@ if __name__ == "__main__":
 	pq.dequeue()
 	pq.enqueue("b",4)
 	pq.enqueue("c",2)
+	print(pq)
 	pq.dequeue()
 	pq.enqueue("d",4)
+	print(pq._size)
+	print(pq)

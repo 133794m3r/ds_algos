@@ -4,8 +4,8 @@ class MaxBinaryHeap:
 		self._size = 0
 
 	def shift_up(self):
-		idx = self._size
-		item = self._values[self._size]
+		idx = self._size-1
+		item = self._values[idx]
 		while idx > 0:
 			parent_idx = (idx -1) >> 1
 			parent = self._values[parent_idx]
@@ -52,4 +52,13 @@ class MaxBinaryHeap:
 			return self._values[0]
 		else:
 			return None
-
+			
+if __name__ == "__main__":
+	heap = MaxBinaryHeap()
+	heap.insert(41)
+	heap.insert(39)
+	heap.insert(33)
+	heap.insert(18)
+	heap.insert(27)
+	heap.insert(12)
+	heap.insert(55)

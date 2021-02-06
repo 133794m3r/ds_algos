@@ -19,7 +19,10 @@ template <typename T> class Stack{
 		last_=nullptr;
 		size_=0;
 	}
-
+	Stack(T value){
+		first_ = new Node<T>(value);
+		size_ = 1;
+	}
 	Stack(T *values,unsigned long n){
 		first_ = new Node<T>(values[0]);
 		for(size_t i=1;i<n;i++){
@@ -43,7 +46,7 @@ template <typename T> class Stack{
 
 	T pop(){
 		if(first_ == nullptr){
-			return 0;
+			return T();
 		}
 		Node<T> *tmp = first_;
 		first_ = first_->next;

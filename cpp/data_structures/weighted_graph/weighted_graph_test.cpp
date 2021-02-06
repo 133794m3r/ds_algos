@@ -18,4 +18,6 @@ int main(){;
 	graph.add_edge("e","f", 1);
 	graph.shortest_path("a","f");
 	std::cout << graph.shortest_path("a","f");
+	std::cout << graph.dfs("a");
+	graph.remove_vertex("a");
 }

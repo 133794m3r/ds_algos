@@ -20,9 +20,9 @@ template <typename T, typename U> class WeightedGraph {
 			this->weight = weight_;
 		}
 	};
-  public:
 	std::unordered_map<T,std::vector<Edge>> adj_lists;
 	ull vertexes;
+  public:
 	WeightedGraph(){
 		vertexes = 0;
 	}
@@ -44,13 +44,13 @@ template <typename T, typename U> class WeightedGraph {
 		return true;
 	}
 	void remove_edge(T v1, T v2){
-		for(ull i =0;i<adj_lists[v1].length;i++){
+		for(ull i =0;i<adj_lists[v1].size();i++){
 			if(adj_lists[v1][i].node == v2) {
 				adj_lists[v1].erase(adj_lists[v1].begin() + i);
 				break;
 			}
 		}
-		for(ull i =0;i<adj_lists[v2].length;i++){
+		for(ull i =0;i<adj_lists[v2].size();i++){
 			if(adj_lists[v2][i].node == v1) {
 				adj_lists[v2].erase(adj_lists[v2].begin() + i);
 				break;
@@ -73,19 +73,19 @@ template <typename T, typename U> class WeightedGraph {
 	}
 
 	std::vector<T> dfs(T start){
-		Stack stack(start);
+		Stack<T> stack(start);
 		std::unordered_map<T,bool> visited{};
 		visited.reserve(vertexes);
 		visited[start] = true;
 		std::vector<T> result;
 		result.reserve(vertexes);
-		while(stack){
+		while(stack.size()){
 			T current = stack.pop();
 			result.push_back(current);
 			for(Edge neighbor: adj_lists[current]){
 				if(visited.count(neighbor.node) == 0){
-					stack.push(neighbor);
-					visited[neighbor] = true;
+					stack.push(neighbor.node);
+					visited[neighbor.node] = true;
 				}
 			}
 		}

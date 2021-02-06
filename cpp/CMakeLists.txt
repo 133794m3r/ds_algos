@@ -27,34 +27,36 @@ add_executable(sort_tests
 add_executable(linked_list
 		data_structures/linked_list/d_linked_list.hxx
 		data_structures/linked_list/linked_list.hxx
-		data_structures/linked_list/linked_list.cpp )
+		data_structures/linked_list/linked_list_test.cpp )
 
 add_executable(queue_test
 		data_structures/queue/queue.hxx
-		data_structures/queue/queue.cpp)
+		data_structures/queue/queue_test.cpp)
 
 add_executable(stack_test
 		data_structures/stack/stack.hxx
-		data_structures/stack/stack.cpp)
+		data_structures/stack/stack_test.cpp)
 
 add_executable(bst_test
-		data_structures/binary_search_tree/bst.cpp
+		data_structures/binary_search_tree/bst_test.cpp
 		data_structures/binary_search_tree/bst.hxx)
 
 add_executable(hashtable_test
 		data_structures/hashtable/hashtable.hxx
-		data_structures/hashtable/hashtable.cpp)
+		data_structures/hashtable/hashtable_test.cpp)
 
 add_executable(graph_test
-		data_structures/graph/graph.cpp
+		data_structures/graph/graph_test.cpp
 		data_structures/graph/graph.hxx)
 
 add_executable(max_heap_test
-		data_structures/heaps/maxbinary.cpp data_structures/heaps/maxbinary.hxx)
+		data_structures/heaps/maxbinary_test.cpp
+		data_structures/heaps/maxbinary.hxx)
 
 add_executable(priority_q_test
-		data_structures/priority_q/priorityq.cpp data_structures/priority_q/priorityq.hxx)
-# algorithms
+		data_structures/priority_q/priorityq_test.cpp
+		data_structures/priority_q/priorityq.hxx)
+# still data structures for now
 add_executable(dijsktra_test
-		algos/pathfinding/dijkstra/dijkstra.cpp
-		algos/pathfinding/dijkstra/dijkstra.hxx)
+		data_structures/weighted_graph/weighted_graph_test.cpp
+		data_structures/weighted_graph/weighted_graph.hxx)

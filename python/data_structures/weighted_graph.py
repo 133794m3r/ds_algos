@@ -22,24 +22,24 @@ class WeightedGraph:
 			self.vertexes +=1
 
 	def add_edge(self,src,dest,weight):
-		if dest in self.adj_lists[src]:
-			return
+		for edge in self.adj_lists[src]:
+			if edge.node == dest:
+				return
 		self.adj_lists[src].append(self.edge(dest,weight))
 		self.adj_lists[dest].append(self.edge(src,weight))
 
-	def remove_edge(self,v1,v2,weight):
-		for idx,item in enumerate(self.adj_lists[v1]):
+	def remove_edge(self,v1,v2):
+		for idx in range(self.adj_lists[v1].length):
 			if self.adj_lists[v1][idx].node == v2:
 				del self.adj_lists[v1][idx]
 				break
-		for idx,item in enumerate(self.adj_lists[v1]):
+		for idx in enumerate(self.adj_lists[v1].length):
 			if self.adj_lists[v1][idx].node == v2:
 				del self.adj_lists[v1][idx]
 				break
 
 
 	def remove_vertex(self,v1):
-		x = self.adj_lists[v1]
 		while self.adj_lists[v1]:
 			tmp = self.adj_lists[v1][0]
 			self.remove_edge(v1,tmp.node)
@@ -114,4 +114,4 @@ if __name__ == "__main__":
 	graph.add_edge("d","f", 1)
 	graph.add_edge("e","f", 1)
 
-	print(graph.shortest_path("a", "e"))
+	print(graph.shortest_path("a", "f"))

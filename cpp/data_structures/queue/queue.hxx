@@ -47,7 +47,7 @@ template <typename T> class Queue{
 
 	T dequeue(){
 		if(!first_){
-			return 0;
+			return T();
 		}
 		if(first_ == last_){
 			last_ = nullptr;

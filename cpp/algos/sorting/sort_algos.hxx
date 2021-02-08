@@ -2,8 +2,8 @@
 // Created by macarthur on 1/3/21.
 //
 
-#ifndef ITP232_SORT_ALGOS_HXX
-#define ITP232_SORT_ALGOS_HXX
+#ifndef _SORT_ALGOS_HXX
+#define _SORT_ALGOS_HXX
 
 #include <memory>
 #include <complex>
@@ -276,4 +276,4 @@ template <typename T, typename N >void qsrt(T *arr, N low, N high){
 template <typename T, typename N> void quick_sort(T *arr, N start, N length){
 	qsrt(arr,start,length-1);
 }
-#endif //ITP232_SORT_ALGOS_HXX
+#endif //_SORT_ALGOS_HXX

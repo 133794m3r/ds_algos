@@ -62,3 +62,5 @@ if __name__ == "__main__":
 	heap.insert(27)
 	heap.insert(12)
 	heap.insert(55)
+	print(heap.extract_max())
+	print(heap.get_max())

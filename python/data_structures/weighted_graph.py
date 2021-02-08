@@ -29,11 +29,11 @@ class WeightedGraph:
 		self.adj_lists[dest].append(self.edge(src,weight))
 
 	def remove_edge(self,v1,v2):
-		for idx in range(self.adj_lists[v1].length):
+		for idx in range(len(self.adj_lists[v1])):
 			if self.adj_lists[v1][idx].node == v2:
 				del self.adj_lists[v1][idx]
 				break
-		for idx in enumerate(self.adj_lists[v1].length):
+		for idx in range(len(self.adj_lists[v1])):
 			if self.adj_lists[v1][idx].node == v2:
 				del self.adj_lists[v1][idx]
 				break
@@ -55,7 +55,7 @@ class WeightedGraph:
 			result.append(current)
 			for neighbor in self.adj_lists[current]:
 				if not visited.get(neighbor):
-					stack.append(neighbor)
+					stack.append(neighbor.node)
 					visited[neighbor] = 1
 		return result
 
@@ -113,5 +113,6 @@ if __name__ == "__main__":
 	graph.add_edge("d","e", 3)
 	graph.add_edge("d","f", 1)
 	graph.add_edge("e","f", 1)
-
 	print(graph.shortest_path("a", "f"))
+	print(graph.dfs("a"))
+	graph.remove_vertex("a")

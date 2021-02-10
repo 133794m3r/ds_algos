@@ -162,7 +162,8 @@ class BinarySearchTree{
 	}
 }
 if(typeof module !== 'undefined') {
-	module.exports = BinarySearchTree;
+
+	//module.exports = BinarySearchTree;
 	if(require.main === module) {
 		let bst = new BinarySearchTree();
 		bst.insert(10);

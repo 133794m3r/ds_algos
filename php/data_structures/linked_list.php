@@ -45,7 +45,45 @@ class LinkedList{
         }
         return $cur;
     }
+	public function unshift($value){
+    	if($this->head)
+    		$this->head = new LinkNode($value,$this->head);
+    	else{
+    		$this->head = new LinkNode($value);
+    		$this->tail = $this->head;
+		}
+    	$this->length++;
+	}
+	public function shift(): ?LinkNode {
+    	if($this->head){
+    		$tmp = $this->head;
+    		$this->head = $tmp->next;
+    		$this->length--;
+    		if($this->length === 0){
+    			$this->tail = NULL;
+			}
+    		return $tmp;
+		}
+    	return NULL;
+	}
 
+    public function insert($index,$value){
+    	if($index > $this->length || $index < 0)
+    		return NULL;
+    	else if($index == 0)
+    		$this->unshift($value);
+    	else{
+    		$prev = $this->get($index - 1);
+    		$prev->next = new LinkNode($value,$prev->next);
+		}
+    	$this->length++;
+	}
+	public function set($index, $value){
+    	if($index > 0 && $index < $this->length){
+    		$p = $this->get($index);
+    		$p->value = $value;
+		}
+	}
     /**
      * @return LinkNode|null
      */
@@ -53,18 +91,37 @@ class LinkedList{
         if($this->head == NULL){
             return NULL;
         }
-        $prev = $this->get($this->length-2);
-        $popped = $this->tail->value;
-        $this->tail = $prev;
-        $this->tail = NULL;
+        $popped = $this->tail;
+        if($this->length > 1) {
+			$prev = $this->get($this->length-2);
+			$this->tail = $prev;
+			$this->tail->next = NULL;
+		}
+        else
+	        $this->tail = NULL;
         $this->length--;
         return $popped;
     }
-
+	public function remove($index): ?LinkNode {
+		if($index < 0 || $index > $this->length)
+			return NULL;
+		if($index === $this->length - 1)
+			return $this->pop();
+		else if($index === 0)
+			return $this->shift();
+		else{
+			$prev = $this->get($index-1);
+			$removed = $prev->next;
+			$prev->next = $removed->next;
+			$this->length--;
+			return $removed;
+		}
+	}
     public function push($value){
         if($this->head == NULL){
             $this->head = new LinkNode($value);
             $this->tail = $this->head;
+            $this->length++;
         }
         else{
             $cur = $this->head;
@@ -77,6 +134,20 @@ class LinkedList{
         }
     }
 
+    public function reverse(){
+    	$current = $this->head;
+    	$prev = NULL;
+    	$next = NULL;
+    	$this->head = $this->tail;
+    	$this->tail = $current;
+    	while($current){
+    		$next = $current->next;
+    		$current->next = $prev;
+    		$prev = $current;
+    		$current = $next;
+		}
+		$this->head = $prev;
+	}
     public function __toString(): string {
         $cur = $this->head;
         $res = "[";
@@ -90,8 +161,27 @@ class LinkedList{
 
 }
 
-$ll = new LinkedList();
-$ll->push(1);
-$ll->push(4);
-$ll->push(5);
-print($ll);
+if($argv) {
+	$ll = new LinkedList();
+	$ll->push(4);
+	$ll->push(5);
+	$ll->push(6);
+	$ll->insert(2, 222);
+	$ll->push(7);
+	$ll->push(8);
+	$ll->push(9);
+	$ll->push(10);
+	$ll->reverse();
+	$ll->pop();
+	$ll->set(2, 100);
+	$ll->insert(5, 555);
+	$ll->insert(4, 444);
+	$ll->shift();
+	$ll->unshift(6);
+	$ll->remove(5);
+	$expected = '[6, 9, 100, 7, 444, 555, 222, 5]';
+	if((string)$ll === $expected)
+		echo "All's Clear\n";
+	else
+		echo "Error\n$ll\n";
+}

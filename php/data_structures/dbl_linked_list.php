@@ -147,21 +147,7 @@ class DblLinkedList{
 		}
 	}
 	public function reverse(){
-//    	$cur = $this->head;
-////    	$this->head = $this->tail;
-//    	$this->tail = $cur;
-//    	$prev = NULL;
-//    	$next = NULL;
-//    	$tmp = null;
-//    	while($cur !== NULL){
-//			$tmp = $cur->prev;
-//			$cur->prev = $cur->next;
-//			$cur->next = $tmp;
-//			$cur = $cur->prev;
-//		}
-//		if($tmp !== null)
-//			$this->head = $tmp;
-//    	$this->tail->next = null;
+  	 	$this->tail->next = null;
 		$cur = $this->head;
 		$this->head = $this->tail;
 		$this->tail = $cur;

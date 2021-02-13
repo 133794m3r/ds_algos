@@ -7,6 +7,10 @@ class PriorityQueue{
 		toString(){
 			return `{ value:${this.value} next:${this.priority} }`;
 		}
+		//to allow for comparison operators
+		valueOf(){
+			return this.priority;
+		}
 	}
 	constructor(){
 		this._values = [];
@@ -17,7 +21,7 @@ class PriorityQueue{
 		let idx = this._len - 1;
 		while(idx > 0){
 			let parentIdx = (idx -1)>>>1;
-			if(this._values[idx].priority >= this._values[parentIdx].priority) break;
+			if(this._values[idx] >= this._values[parentIdx]) break;
 			let tmp = this._values[parentIdx];
 			this._values[parentIdx] = this._values[idx];
 			this._values[idx] = tmp;
@@ -37,10 +41,10 @@ class PriorityQueue{
 			let left = (idx << 1)+1;
 			let right = left+1;
 			if(left < this._len){
-				if(this._values[left].priority < this._values[idx].priority)
+				if(this._values[left] < this._values[idx])
 					swap_id = left;
 			}
-			if(right < this._len && this._values[swap_id].priority > this._values[right].priority){
+			if(right < this._len && this._values[swap_id] > this._values[right]){
 				swap_id = right;
 			}
 			if(swap_id === idx) break;

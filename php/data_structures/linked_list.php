@@ -72,6 +72,10 @@ class LinkedList{
     		return NULL;
     	else if($index == 0)
     		$this->unshift($value);
+    	else if($this->head === null) {
+			$this->head = new LinkNode($value);
+			$this->tail = $this->head;
+		}
     	else{
     		$prev = $this->get($index - 1);
     		$prev->next = new LinkNode($value,$prev->next);

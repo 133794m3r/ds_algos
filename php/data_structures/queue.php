@@ -57,6 +57,9 @@ class Queue {
 		$os .= PHP_EOL.'}'.PHP_EOL;
 		return $os;
 	}
+	public function length(){
+		return $this->size;
+	}
 }
 
 $q = new Queue();

@@ -11,44 +11,44 @@ class QueueNode{
 	}
 }
 class Queue {
-	public int $size;
-	public ?QueueNode $first;
-	public ?QueueNode $last;
+	private int $size_;
+	private ?QueueNode $first_;
+	private ?QueueNode $last_;
 
 	public function __construct(){
-		$this->first = null;
-		$this->last = null;
-		$this->size = 0;
+		$this->first_ = null;
+		$this->last_ = null;
+		$this->size_ = 0;
 	}
 
 	public function enqueue($value){
-		if($this->first === null){
-			$this->first = new QueueNode($value);
-			$this->last = $this->first;
+		if($this->first_ === null){
+			$this->first_ = new QueueNode($value);
+			$this->last_ = $this->first_;
 		}
 		else{
 			$tmp = new QueueNode($value);
-			$this->last->next = $tmp;
-			$this->last = $tmp;
+			$this->last_->next = $tmp;
+			$this->last_ = $tmp;
 		}
-		$this->size++;
+		$this->size_++;
 	}
 
 	public function dequeue(){
-		if(!$this->first){
+		if(!$this->first_){
 			return null;
 		}
-		if($this->first === $this->last)
-			$this->last = null;
+		if($this->first_ === $this->last_)
+			$this->last_ = null;
 
-		$tmp = $this->first;
-		$this->first = $this->first->next;
-		$this->size--;
+		$tmp = $this->first_;
+		$this->first_ = $this->first_->next;
+		$this->size_--;
 		return $tmp->value;
 	}
 	public function __toString(): string {
 		$os = '{' . PHP_EOL;
-		$tmp = $this->first;
+		$tmp = $this->first_;
 		while ($tmp) {
 			$os .= "| value: $tmp->value |";
 			$os .= "\t";
@@ -58,7 +58,7 @@ class Queue {
 		return $os;
 	}
 	public function length(){
-		return $this->size;
+		return $this->size_;
 	}
 }
 

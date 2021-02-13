@@ -16,16 +16,16 @@ class BSTNode{
 }
 class BinarySearchTree {
 
-	private ?BSTNode $root;
+	private ?BSTNode $root_;
 	public function __construct(){
-		$this->root = null;
+		$this->root_ = null;
 	}
 
 	public function find($value): ?BSTNode{
-		if($this->root === null)
+		if($this->root_ === null)
 			return null;
 
-		$cur = $this->root;
+		$cur = $this->root_;
 		$found = false;
 		while(! $found){
 			if($cur->value > $value)
@@ -39,7 +39,7 @@ class BinarySearchTree {
 	}
 
 	public function contains($value): bool {
-		$cur = $this->root;
+		$cur = $this->root_;
 		while($cur){
 			if($cur->value > $value)
 				$cur = $cur->left;
@@ -52,11 +52,11 @@ class BinarySearchTree {
 	}
 
 	public function insert($value){
-		if($this->root === null){
-			$this->root = new BSTNode($value);
+		if($this->root_ === null){
+			$this->root_ = new BSTNode($value);
 		}
 		else{
-			$cur = $this->root;
+			$cur = $this->root_;
 			while($cur !== null){
 				if($cur->value > $value) {
 					if($cur->left)
@@ -79,45 +79,45 @@ class BinarySearchTree {
 			}
 		}
 	}
-	public function _height($node): int{
+	public function height($node): int{
 		if($node === null)
 			return 0;
 		else{
-			$x = $this->_height($node->left);
-			$y = $this->_height($node->right);
+			$x = $this->height($node->left);
+			$y = $this->height($node->right);
 			return $x>$y?$x+1:$y+1;
 		}
 	}
 
 	public function get_height($node=null): int{
 		if($node === null)
-			$node = $this->root;
+			$node = $this->root_;
 
-		return $this->_height($node);
+		return $this->height($node);
 	}
 
-	public function _remove($node, $key){
+	private function remove_($node, $key){
 		if($node === null)
 			return null;
 		if(! ($node->left && $node->right)){
 			if($node->left === $node->right){
-				if($node === $this->root)
-					$this->root = null;
+				if($node === $this->root_)
+					$this->root_ = null;
 				return null;
 			}
 		}
 		if($key < $node->value)
-			$node->left = $this->_remove($node->left, $key);
+			$node->left = $this->remove_($node->left, $key);
 		else if($key > $node->value)
-			$node->right = $this->_remove($node->right, $key);
+			$node->right = $this->remove_($node->right, $key);
 		else{
-			if($this->_height($node->left) > $this->_height($node->right)){
+			if($this->height($node->left) > $this->height($node->right)){
 				$q = $node->left;
 				while($q && ($node->right !== null)){
 					$q = $q->right;
 				}
 				$node->value = $q->value;
-				$node->left = $this->_remove($node->left,$q->value);
+				$node->left = $this->remove_($node->left,$q->value);
 			}
 			else {
 				$q = $node->right;
@@ -125,19 +125,19 @@ class BinarySearchTree {
 					$q = $q->left;
 				}
 				$node->value = $q->value;
-				$node->right = $this->_remove($node->right, $q->value);
+				$node->right = $this->remove_($node->right, $q->value);
 			}
 		}
 		return $node;
 	}
 	public function remove($key){
-		return $this->_remove($this->root, $key);
+		return $this->remove_($this->root_, $key);
 	}
 	public function bfs(): array{
 		$q = new Queue();
 		$data = [];
-		$q->enqueue($this->root);
-		while($q->size){
+		$q->enqueue($this->root_);
+		while($q->length()){
 			$cur = $q->dequeue();
 			array_push($data,$cur->value);
 			if($cur->left) $q->enqueue($cur->left);
@@ -146,40 +146,40 @@ class BinarySearchTree {
 		return $data;
 	}
 
-	private function pre_traverse(&$data, $node){
+	public function pre_traverse(&$data, $node){
 		array_push($data, $node->value);
 		if($node->left) $this->pre_traverse($data, $node->left);
 		if($node->right) $this->pre_traverse($data, $node->right);
 	}
 
-	private function in_traverse(&$data,$node){
+	public function in_traverse(&$data,$node){
 		if($node->left) $this->pre_traverse($data, $node->left);
 		array_push($data, $node->value);
 		if($node->right) $this->pre_traverse($data, $node->right);
 	}
 
-	private function post_traverse(&$data,$node){
+	public function post_traverse(&$data,$node){
 		if($node->left) $this->pre_traverse($data, $node->left);
 		if($node->right) $this->pre_traverse($data, $node->right);
 		array_push($data, $node->value);
 	}
 
 	public function pre_order(): array{
-		$cur = $this->root;
+		$cur = $this->root_;
 		$data = [];
 		$this->pre_traverse($data,$cur);
 		return $data;
 	}
 
 	public function in_order(): array{
-		$cur = $this->root;
+		$cur = $this->root_;
 		$data = [];
 		$this->in_traverse($data,$cur);
 		return $data;
 	}
 
 	public function post_order(): array{
-		$cur = $this->root;
+		$cur = $this->root_;
 		$data = [];
 		$this->post_traverse($data, $cur);
 		return $data;

@@ -15,41 +15,42 @@ class DblLinkNode{
         $this->prev = $prev;
     }
 }
+
 class DblLinkedList{
     /**
      * @var DblLinkNode | NULL
      */
-    private ?DblLinkNode $head;
+    private ?DblLinkNode $head_;
     /**
      * @var DblLinkNode | NULL
      */
-    private ?DblLinkNode $tail;
+    private ?DblLinkNode $tail_;
     /**
      * @var int
      */
-    private int $length;
+    private int $length_;
 
     public function __construct() {
-        $this->head = NULL;
-        $this->tail = NULL;
-        $this->length = 0;
+        $this->head_ = NULL;
+        $this->tail_ = NULL;
+        $this->length_ = 0;
     }
 	public function unshift($value){
-		if($this->head)
-			$this->head = new DblLinkNode($value,null,$this->head);
+		if($this->head_)
+			$this->head_ = new DblLinkNode($value,null,$this->head_);
 		else{
-			$this->head = new DblLinkNode($value);
-			$this->tail = $this->head;
+			$this->head_ = new DblLinkNode($value);
+			$this->tail_ = $this->head_;
 		}
-		$this->length++;
+		$this->length_++;
 	}
 	public function shift(): ?DblLinkNode {
-		if($this->head){
-			$tmp = $this->head;
-			$this->head = $tmp->next;
-			$this->length--;
-			if($this->length === 0){
-				$this->tail = NULL;
+		if($this->head_){
+			$tmp = $this->head_;
+			$this->head_ = $tmp->next;
+			$this->length_--;
+			if($this->length_ === 0){
+				$this->tail_ = NULL;
 			}
 			return $tmp;
 		}
@@ -57,41 +58,41 @@ class DblLinkedList{
 	}
 
 	public function insert($index,$value){
-		if($index > $this->length || $index < 0)
+		if($index > $this->length_ || $index < 0)
 			return NULL;
 		else if($index == 0)
 			$this->unshift($value);
-		else if($this->head === NULL){
-			$this->head = new DblLinkNode($value);
-			$this->tail = $this->head;
+		else if($this->head_ === NULL){
+			$this->head_ = new DblLinkNode($value);
+			$this->tail_ = $this->head_;
 		}
 		else{
 			$prev = $this->get($index - 1);
 			$prev->next = new DblLinkNode($value,$prev,$prev->next);
 		}
-		$this->length++;
+		$this->length_++;
 	}
 	public function set($index, $value){
-		if($index > 0 && $index < $this->length){
+		if($index > 0 && $index < $this->length_){
 			$p = $this->get($index);
 			$p->value = $value;
 		}
 	}
     public function get($index): ?DblLinkNode {
-        if ($index < 0 or $index > $this->length){
+        if ($index < 0 or $index > $this->length_){
             return NULL;
         }
-        $cur = $this->head;
+        $cur = $this->head_;
         $i = 0;
-        if($index <= ($this->length >> 1)){
+        if($index <= ($this->length_ >> 1)){
 			while ($i != $index){
 				$cur = $cur->next;
 				$i++;
 			}
 		}
         else{
-        	$cur = $this->tail;
-        	$i = $this->length-1;
+        	$cur = $this->tail_;
+        	$i = $this->length_-1;
         	while($i != $index){
         		$cur = $cur->prev;
         		$i--;
@@ -104,37 +105,38 @@ class DblLinkedList{
      * @return DblLinkNode|null
      */
     public function pop(): ?DblLinkNode {
-        if($this->head == NULL){
+        if($this->head_ == NULL){
             return NULL;
         }
-		$popped = $this->tail;
-        if($this->length == 1){
-        	$this->head = $this->tail = NULL;
+		$popped = $this->tail_;
+        if($this->length_ == 1){
+        	$this->head_ = $this->tail_ = NULL;
 		}
         else{
-        	$this->tail = $popped->prev;
-        	$this->tail->next = NULL;
+        	$this->tail_ = $popped->prev;
+        	$this->tail_->next = NULL;
 		}
-        $this->length--;
+        $this->length_--;
         return $popped;
     }
 
     public function push($value){
-        if($this->head == NULL){
-            $this->head = new DblLinkNode($value);
-            $this->tail = $this->head;
+        if($this->head_ == NULL){
+            $this->head_ = new DblLinkNode($value);
+            $this->tail_ = $this->head_;
         }
         else{
-			$p = new DblLinkNode($value,$this->tail);
-			$this->tail->next = $p;
-			$this->tail = $p;
+			$p = new DblLinkNode($value,$this->tail_);
+			$this->tail_->next = $p;
+			$this->tail_ = $p;
         }
-        $this->length++;
+        $this->length_++;
     }
+
 	public function remove($index): ?DblLinkNode {
-		if($index < 0 || $index > $this->length)
+		if($index < 0 || $index > $this->length_)
 			return NULL;
-		if($index === $this->length - 1)
+		if($index === $this->length_ - 1)
 			return $this->pop();
 		else if($index === 0)
 			return $this->shift();
@@ -142,15 +144,16 @@ class DblLinkedList{
 			$prev = $this->get($index-1);
 			$removed = $prev->next;
 			$prev->next = $removed->next;
-			$this->length--;
+			$this->length_--;
 			return $removed;
 		}
 	}
+
 	public function reverse(){
-  	 	$this->tail->next = null;
-		$cur = $this->head;
-		$this->head = $this->tail;
-		$this->tail = $cur;
+  	 	$this->tail_->next = null;
+		$cur = $this->head_;
+		$this->head_ = $this->tail_;
+		$this->tail_ = $cur;
 		$prev = null;
 		$next = null;
 		while($cur !== null){
@@ -162,7 +165,7 @@ class DblLinkedList{
 		}
 	}
     public function __toString(): string {
-        $cur = $this->head;
+        $cur = $this->head_;
         $res = "[";
         while($cur->next != NULL){
             $res.="$cur->value, ";

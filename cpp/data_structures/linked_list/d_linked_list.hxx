@@ -1,5 +1,5 @@
-#ifndef PROG_ASSIGNMENT_DBLY_LINKEDLIST_HXX
-#define PROG_ASSIGNMENT_DBLY_LINKEDLIST_HXX
+#ifndef _DBLY_LINKEDLIST_HXX
+#define _DBLY_LINKEDLIST_HXX
 #include <vector>
 #include <iostream>
 
@@ -91,7 +91,7 @@ template<typename T> class DoublyLinkedList {
 		Node *tmp =  get(idx);
 		//default to returning 0 if they are out of range.
 		if(tmp == nullptr){
-			return 0;
+			return T();
 		}
 		else {
 			return tmp->data;
@@ -287,4 +287,4 @@ template<typename T> class DoublyLinkedList {
 };
 
 
-#endif //PROG_ASSIGNMENT_DBLY_LINKEDLIST_HXX
+#endif //_DBLY_LINKEDLIST_HXX

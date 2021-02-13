@@ -87,7 +87,7 @@ template<typename T> class LinkedList {
 		if(tmp != nullptr)
 			return tmp->data;
 		else
-			return 0;
+			return T();
 	}
 
 	void insert(long long idx,T val){

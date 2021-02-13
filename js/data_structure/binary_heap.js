@@ -1,64 +1,64 @@
 class MaxBinaryHeap{
 	constructor(){
-		this.values = [];
-		this.size = 0;
+		this._values = [];
+		this._size = 0;
 	}
 	shiftUp(){
-		let idx = this.size -1;
-		let item = this.values[idx];
+		let idx = this._size -1;
+		let item = this._values[idx];
 		let parentIdx = 0;
 		let parent;
 		while(idx > 0){
 			parentIdx = (idx-1) >> 1;
-			parent = this.values[parentIdx];
+			parent = this._values[parentIdx];
 			if (item <= parent) break
-			this.values[parentIdx] = item;
-			this.values[idx] = parent;
+			this._values[parentIdx] = item;
+			this._values[idx] = parent;
 			idx = parentIdx;
 		}
 	}
 
 	shiftDown(){
-		let el = this.values[0];
+		let el = this._values[0];
 		let idx = 0;
-		const heapSize = this.size;
+		const heapSize = this._size;
 		while (idx < heapSize){
 			let swapIdx = idx;
 			let left = (idx << 1) + 1;
 			let right = left+1;
-			if(left < heapSize && this.values[left] < el)
+			if(left < heapSize && this._values[left] < el)
 				swapIdx = left;
 
-			if(right < heapSize && this.values[swapIdx] < this.values[right])
+			if(right < heapSize && this._values[swapIdx] < this._values[right])
 				swapIdx = right;
 
 			if (swapIdx === idx) break;
-			this.values[idx] = this.values[swapIdx];
-			this.values[swapIdx] = el;
+			this._values[idx] = this._values[swapIdx];
+			this._values[swapIdx] = el;
 			idx = swapIdx;
 		}
 	}
 
 	insert(element){
-		this.values.push(element);
-		this.size++;
+		this._values.push(element);
+		this._size++;
 		this.shiftUp();
 	}
 
 	extractMax(){
 		let removed = undefined;
-		if (this.size > 0){
-			removed = this.values[0];
-			this.values[0] = this.values.pop();
-			this.size--;
+		if (this._size > 0){
+			removed = this._values[0];
+			this._values[0] = this._values.pop();
+			this._size--;
 			this.shiftDown();
 		}
 		return removed;
 	}
 
 	getMax(){
-		if (this.size >0){
-			return this.values[0];
+		if (this._size >0){
+			return this._values[0];
 		}
 		else{
 			return undefined;

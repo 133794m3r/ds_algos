@@ -1,19 +1,19 @@
 class LinkedList {
 	constructor(values){
 		if(arguments.length === 0){
-			this.head=null;
-			this.tail=null;
-			this.length=0;
+			this._head=null;
+			this._tail=null;
+			this._length=0;
 		}
 		else{
-			this.length = values.length;
-			this.head = new LinkedList.Node(values[0]);
-			let current = this.head;
-			for(let i=1;i<this.length;i++) {
+			this._length = values.length;
+			this._head = new LinkedList.Node(values[0]);
+			let current = this._head;
+			for(let i=1; i<this._length; i++) {
 				current.next = new LinkedList.Node(values[i]);
 				current = current.next;
 			}
-			this.tail = current;
+			this._tail = current;
 
 		}
 	}
@@ -26,22 +26,22 @@ class LinkedList {
 		}
 	}
 	push(value){
-		if(!this.head){
-			this.head = new LinkedList.Node(value);
-			this.tail = this.head;
+		if(!this._head){
+			this._head = new LinkedList.Node(value);
+			this._tail = this._head;
 		}
 		else{
 			let p = new LinkedList.Node(value);
-			this.tail.next = p;
-			this.tail = p;
+			this._tail.next = p;
+			this._tail = p;
 		}
-		this.length++;
+		this._length++;
 	}
 	get(idx){
-		if (idx < 0 || idx> this.length){
+		if (idx < 0 || idx> this._length){
 			return undefined;
 		}
-		let current = this.head;
+		let current = this._head;
 		let i = 0;
 		while(i !== idx){
 			current = current.next;
@@ -50,19 +50,19 @@ class LinkedList {
 		return current;
 	}
 	pop(){
-		if(!this.head){
+		if(!this._head){
 			return undefined;
 		}
-		let popped = this.tail.value;
-		if(this.length > 1) {
-			this.tail = this.get(this.length - 2);
-			this.tail.next = undefined;
+		let popped = this._tail.value;
+		if(this._length > 1) {
+			this._tail = this.get(this._length - 2);
+			this._tail.next = undefined;
 		}
 		else{
-			this.head = undefined;
-			this.tail = this.head;
+			this._head = undefined;
+			this._tail = this._head;
 		}
-		this.length--;
+		this._length--;
 		return popped;
 	}
 
@@ -73,64 +73,64 @@ class LinkedList {
 	 * @returns
 	 */
 	insert(idx,value){
-		if(idx > this.length || idx < 0)
+		if(idx > this._length || idx < 0)
 			return undefined;
 		else if(idx === 0){
 			this.unshift(value);
 		}
-		else if(idx === this.length){
+		else if(idx === this._length){
 			this.push(value);
 		}
 		else{
 			let prev = this.get(idx - 1);
 			prev.next = new LinkedList.Node(value, prev.next);
 		}
-		this.length++;
+		this._length++;
 	}
 	set(idx,value){
-		if( idx > 0 && idx < this.length){
+		if( idx > 0 && idx < this._length){
 			let p = this.get(idx);
 			p.value = value;
 		}
 	}
 	shift(){
-		if(this.head){
-			let tmp = this.head;
-			this.head = tmp.next;
-			this.length--;
-			if(this.length === 0){
-				this.tail = undefined;
+		if(this._head){
+			let tmp = this._head;
+			this._head = tmp.next;
+			this._length--;
+			if(this._length === 0){
+				this._tail = undefined;
 			}
 			return tmp;
 		}
 	}
 	unshift(value){
-		if(this.head){
-			this.head = new LinkedList.Node(value,this.head);
+		if(this._head){
+			this._head = new LinkedList.Node(value,this._head);
 		}
 		else{
-			this.head = new LinkedList.Node(value);
-			this.tail = this.head;
+			this._head = new LinkedList.Node(value);
+			this._tail = this._head;
 		}
-		this.length++;
+		this._length++;
 	}
 	remove(idx){
-		if(idx < 0 || idx > this.length){
+		if(idx < 0 || idx > this._length){
 			return undefined;
 		}
-		else if(idx === this.length - 1){
+		else if(idx === this._length - 1){
 			this.pop();
 		}
 		else{
 			let prev = this.get(idx-1);
 			let remove = prev.next;
 			prev.next = remove.next;
-			this.length--;
+			this._length--;
 		}
 	}
 
 	reverse(){
-		let current = this.head;
+		let current = this._head;
 		let prev = undefined;
 		let next = undefined;
 		while(current){
@@ -139,14 +139,14 @@ class LinkedList {
 			prev = current;
 			current = next;
 		}
-		this.head = prev;
+		this._head = prev;
 	}
 	toString(){
-		let current = this.head;
+		let current = this._head;
 		let output = '['
-		for(let i=0;i<this.length;i++){
+		for(let i=0; i<this._length; i++){
 			output += current.value.toString();
-			if(i < this.length - 1){
+			if(i < this._length - 1){
 				output += ', ';
 			}
 			current = current.next;

@@ -12,12 +12,12 @@ class BinarySearchTree{
 	};
 
 	constructor(){
-		this.root = null;
+		this._root = null;
 	};
 
 	find(value) {
-		if (this.root == null) return undefined;
-		let cur = this.root;
+		if (this._root == null) return undefined;
+		let cur = this._root;
 		let found = false;
 		while (!found && cur) {
 			if (cur.value > value)
@@ -36,11 +36,11 @@ class BinarySearchTree{
 	};
 
 	insert(value){
-		if(!this.root) {
-			this.root = new BinarySearchTree.Node(value);
+		if(!this._root) {
+			this._root = new BinarySearchTree.Node(value);
 		}
 		else{
-			let cur = this.root;
+			let cur = this._root;
 			while(cur) {
 				if (cur.value > value) {
 					if (cur.left) cur = cur.left;
@@ -72,10 +72,10 @@ class BinarySearchTree{
 	}
 
 	bfs(){
-		let cur = this.root;
+		let cur = this._root;
 		let q = new Queue();
 		let data = [];
-		q.enqueue(this.root);
+		q.enqueue(this._root);
 		while(q.size()){
 			cur = q.dequeue().value;
 			data.push(cur.value);
@@ -101,7 +101,7 @@ class BinarySearchTree{
 	}
 
 	preOrder(){
-		let cur = this.root;
+		let cur = this._root;
 		let data = [];
 		this.preTraverse(data,cur);
 		return data;
@@ -109,11 +109,11 @@ class BinarySearchTree{
 	inOrder(){
 		//let cur = this.root;
 		let data = [];
-		this.inTraverse(data,this.root);
+		this.inTraverse(data,this._root);
 		return data;
 	}
 	postOrder(){
-		let cur = this.root;
+		let cur = this._root;
 		let data = [];
 		this.postTraverse(data,cur);
 		return data;
@@ -122,8 +122,8 @@ class BinarySearchTree{
 		if(!node)
 			return null
 		if(! (node.left && node.right) ){
-			if(node === this.root){
-				this.root = null;
+			if(node === this._root){
+				this._root = null;
 			}
 			return null;
 		}
@@ -155,10 +155,10 @@ class BinarySearchTree{
 		return node;
 	}
 	remove(key){
-		return this._remove(this.root, key).value;
+		return this._remove(this._root, key).value;
 	}
 	height(){
-		return this._height(this.root);
+		return this._height(this._root);
 	}
 }
 if(typeof module !== 'undefined') {

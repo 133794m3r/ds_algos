@@ -5,7 +5,7 @@ class PriorityQueue{
 			this.priority = priority;
 		}
 		toString(){
-			return `{ value:${this.value} next:${this.priority} }`;
+			return `{ value:${this.value} priority:${this.priority} }`;
 		}
 		//to allow for comparison operators
 		valueOf(){
@@ -67,7 +67,7 @@ class PriorityQueue{
 	toString(){
 		let os = ''
 		for(let i=0; i<this._len; i++){
-			os += this[i].toString();
+			os += this._values[i].toString();
 			if(i < this._len -1)
 				os+=','
 		}

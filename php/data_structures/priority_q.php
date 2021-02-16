@@ -81,19 +81,21 @@ class PriorityQueue {
 	}
 }
 
-$pq = new PriorityQueue();
-$inf = 1 << 31;
-$pq->enqueue("a",0);
-$pq->enqueue("b",$inf);
-$pq->enqueue("c",$inf);
-$pq->enqueue("d",$inf);
-$pq->enqueue("e",$inf);
-$pq->enqueue("f",$inf);
-$pq->dequeue();
-$pq->enqueue("b",4);
-$pq->enqueue("c",2);
-echo $pq.PHP_EOL;
-$pq->dequeue();
-$pq->enqueue("d",4);
-echo $pq->size().PHP_EOL;
-echo (string) $pq;
+if($argc > 0) {
+	$pq = new PriorityQueue();
+	$inf = 1 << 31;
+	$pq->enqueue("a", 0);
+	$pq->enqueue("b", $inf);
+	$pq->enqueue("c", $inf);
+	$pq->enqueue("d", $inf);
+	$pq->enqueue("e", $inf);
+	$pq->enqueue("f", $inf);
+	$pq->dequeue();
+	$pq->enqueue("b", 4);
+	$pq->enqueue("c", 2);
+	echo $pq . PHP_EOL;
+	$pq->dequeue();
+	$pq->enqueue("d", 4);
+	echo $pq->size() . PHP_EOL;
+	echo (string)$pq;
+}

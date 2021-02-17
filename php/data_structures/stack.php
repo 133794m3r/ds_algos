@@ -14,11 +14,11 @@ class StackNode{
 class Stack {
 	private ?StackNode $first;
 	private ?StackNode $last;
-	private int $size;
+	private int $len;
 	public function __construct(){
 		$this->first = null;
 		$this->last = null;
-		$this->size = 0;
+		$this->len = 0;
 	}
 	public function push($value){
 		if($this->first)
@@ -27,18 +27,21 @@ class Stack {
 			$this->first = new StackNode($value);
 			$this->last = $this->first;
 		}
-		$this->size++;
+		$this->len++;
 	}
 
-	public function pop(){
+	public function pop(): ?StackNode{
 		if($this->first === null)
 			return null;
 		if($this->first === $this->last)
 			$this->last = null;
 		$tmp = $this->first->value;
 		$this->first = $this->first->next;
-		$this->size--;
+		$this->len--;
 		return $tmp;
+	}
+	public function size(): int{
+		return $this->len;
 	}
 }
 

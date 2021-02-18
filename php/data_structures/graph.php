@@ -1,18 +1,20 @@
 <?php
 require_once "stack.php";
 class Graph {
-	private array $adj_lists;
+	protected array $adj_lists;
 	private int $vertexes;
 	public function __construct(){
 		$this->adj_lists = array();
 		$this->vertexes = 0;
 	}
+
 	public function add_vertex($vertex){
 		if(!array_key_exists($vertex,$this->adj_lists)){
 			$this->adj_lists[$vertex] = array();
 			$this->vertexes++;
 		}
 	}
+
 	public function add_edge($src, $dest){
 		if(in_array($dest,$this->adj_lists[$src])){
 			return;
@@ -20,6 +22,7 @@ class Graph {
 		array_push($this->adj_lists[$src],$dest);
 		array_push($this->adj_lists[$dest],$src);
 	}
+
 	public function remove_edge($v1,$v2){
 		$this->adj_lists[$v1] = array_values(array_filter($this->adj_lists[$v1],function($x) use ($v2) {
 			return $x !== $v2;
@@ -58,7 +61,7 @@ class Graph {
 
 }
 
-if($argc === 1){
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))){
 	$g = new Graph();
 	$g->add_vertex('a');
 	$g->add_vertex('b');

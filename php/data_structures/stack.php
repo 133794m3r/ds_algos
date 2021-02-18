@@ -30,7 +30,7 @@ class Stack {
 		$this->len++;
 	}
 
-	public function pop(): ?StackNode{
+	public function pop(){
 		if($this->first === null)
 			return null;
 		if($this->first === $this->last)

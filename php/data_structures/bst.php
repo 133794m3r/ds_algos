@@ -188,7 +188,7 @@ class BinarySearchTree {
 }
 
 //comment out all of this if you don't need it as it is used when running via cli.
-if($argc) {
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))){
 	$bst = new BinarySearchTree();
 	$bst->insert(10);
 	$bst->insert(6);

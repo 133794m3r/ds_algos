@@ -81,7 +81,7 @@ class PriorityQueue {
 	}
 }
 
-if($argc > 0) {
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))){
 	$pq = new PriorityQueue();
 	$inf = 1 << 31;
 	$pq->enqueue("a", 0);

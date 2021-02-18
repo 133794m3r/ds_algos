@@ -45,7 +45,7 @@ class Stack {
 	}
 }
 
-if($argc == 1){
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))){
 	$stack = new Stack();
 	$stack->push('a');
 	$stack->push('b');

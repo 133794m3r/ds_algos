@@ -98,7 +98,7 @@ class WeightedGraph extends Graph{
 
 }
 
-if($argc === 1) {
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))){
 	$g = new WeightedGraph();
 	$g->add_vertex('a');
 	$g->add_vertex('b');

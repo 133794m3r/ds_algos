@@ -61,11 +61,12 @@ class Queue {
 		return $this->size_;
 	}
 }
-
-$q = new Queue();
-$q->enqueue(1);
-$q->enqueue(2);
-$q->enqueue(3);
-echo $q.PHP_EOL;
-echo $q->dequeue().PHP_EOL;
-echo $q.PHP_EOL;
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))) {
+	$q = new Queue();
+	$q->enqueue(1);
+	$q->enqueue(2);
+	$q->enqueue(3);
+	echo $q . PHP_EOL;
+	echo $q->dequeue() . PHP_EOL;
+	echo $q . PHP_EOL;
+}

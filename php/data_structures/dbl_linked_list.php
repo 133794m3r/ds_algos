@@ -176,23 +176,24 @@ class DblLinkedList{
     }
 
 }
-
-$ll = new DblLinkedList();
-$ll->push(4);
-$ll->push(5);
-$ll->push(6);
-$ll->insert(2, 222);
-$ll->push(7);
-$ll->push(8);
-$ll->push(9);
-$ll->push(10);
-echo "$ll\n";
-$ll->reverse();
-$ll->pop();
-$ll->set(2, 100);
-$ll->insert(5, 555);
-$ll->insert(4, 444);
-$ll->shift();
-$ll->unshift(6);
-$ll->remove(5);
-echo "$ll\n";
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))) {
+	$ll = new DblLinkedList();
+	$ll->push(4);
+	$ll->push(5);
+	$ll->push(6);
+	$ll->insert(2, 222);
+	$ll->push(7);
+	$ll->push(8);
+	$ll->push(9);
+	$ll->push(10);
+	echo "$ll\n";
+	$ll->reverse();
+	$ll->pop();
+	$ll->set(2, 100);
+	$ll->insert(5, 555);
+	$ll->insert(4, 444);
+	$ll->shift();
+	$ll->unshift(6);
+	$ll->remove(5);
+	echo "$ll\n";
+}

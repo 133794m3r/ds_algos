@@ -166,7 +166,7 @@ class LinkedList{
 
 }
 
-if($argv) {
+if (!count(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS))){
 	$ll = new LinkedList();
 	$ll->push(4);
 	$ll->push(5);

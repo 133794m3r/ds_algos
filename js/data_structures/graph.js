@@ -38,7 +38,7 @@ class Graph{
 			let current = stack.pop();
 			result.push(current);
 			for(let i=0; i<this._adj_lists[current].length; i++){
-				let neighbor = this._adj_lists[i];
+				let neighbor = this._adj_lists[current][i];
 				if(! visited[neighbor]){
 					stack.push(neighbor);
 					visited[neighbor] = 1;

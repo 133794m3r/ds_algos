@@ -48,15 +48,15 @@ class WeightedGraph:
 
 	def dfs(self,start):
 		stack = [start]
-		visited = {start: 1}
+		visited = {start: True}
 		result = []
 		while stack:
 			current = stack.pop()
 			result.append(current)
 			for neighbor in self.adj_lists[current]:
-				if not visited.get(neighbor):
+				if not visited.get(neighbor.node,False):
 					stack.append(neighbor.node)
-					visited[neighbor] = 1
+					visited[neighbor.node] = True
 		return result
 
 
@@ -77,7 +77,7 @@ class WeightedGraph:
 				nodes.enqueue(vertex,infinity)
 			previous[vertex] = None
 
-		while len(nodes):
+		while len(nodes) != 0:
 			smallest = nodes.dequeue().value
 			if smallest == finish:
 				while previous[smallest]:

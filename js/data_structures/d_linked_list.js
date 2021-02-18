@@ -122,7 +122,7 @@ class DoublyLinkedList {
 		}
 	}
 
-	unshift(value){
+	unShift(value){
 		if(this._head){
 			this._head = new DoublyLinkedList.Node(value,null,this._head);
 		}
@@ -199,7 +199,7 @@ function test(){
 	ll.insert(5,555);
 	ll.insert(4,444);
 	ll.shift();
-	ll.unshift(6);
+	ll.unShift(6);
 	ll.remove(5);
 	const expected = '[6, 9, 100, 7, 444, 555, 222, 5]';
 	if(ll.toString() === expected ){

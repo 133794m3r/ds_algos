@@ -2,7 +2,7 @@
 function swap(&$arr, $i,$j){
 	[$arr[$i], $arr[$j] ] = [ $arr[$j], $arr[$i]];
 }
-function part(&$arr, $low, $high){
+function part(&$arr, $low, $high): int{
 	$pivot = $arr[$high];
 	$i = $low -1;
 	for($j = $low; $j <= $high-1;$j++){
@@ -26,5 +26,5 @@ function quick_sort(&$arr, $start=0){
 
 
 $arr = [1,4,0,5];
-quick_sort($arr,0);
+quick_sort($arr);
 print_r($arr);

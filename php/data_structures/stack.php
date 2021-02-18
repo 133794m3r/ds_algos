@@ -1,5 +1,8 @@
 <?php
 class StackNode{
+	/**
+	 * @var mixed
+	 */
 	public $value;
 	public ?StackNode $next;
 	public function __construct($value, $next=null) {

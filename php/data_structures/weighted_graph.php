@@ -2,7 +2,13 @@
 require_once "priority_q.php";
 require_once "graph.php";
 class _wg_edge{
+	/**
+	 * @var mixed
+	 */
 	public $node;
+	/**
+	 * @var numeric
+	 */
 	public $weight;
 	public function __construct($value,$weight){
 		$this->node = $value;

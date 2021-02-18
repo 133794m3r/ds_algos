@@ -2,6 +2,9 @@
 
 class PQNode{
 	public ?int $priority;
+	/**
+	 * @var mixed;
+	 */
 	public $value;
 	public function __construct($value, $priority=null){
 		$this->value = $value;
@@ -13,8 +16,9 @@ class PQNode{
 }
 
 class PriorityQueue {
-	private $values;
-	private $len;
+
+	private array $values;
+	private int $len;
 	public function __construct(){
 		$this->values = array();
 		$this->len = 0;

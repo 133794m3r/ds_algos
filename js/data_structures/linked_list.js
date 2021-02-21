@@ -76,7 +76,7 @@ class LinkedList {
 		if(idx > this._length || idx < 0)
 			return undefined;
 		else if(idx === 0){
-			this.unshift(value);
+			this.unShift(value);
 		}
 		else if(idx === this._length){
 			this.push(value);

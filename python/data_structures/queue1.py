@@ -51,6 +51,8 @@ class Queue:
 		os += "\n}"
 
 		return os
+	def __len__(self):
+		return self._size
 if __name__ == '__main__':
 	queue = Queue()
 	queue.enqueue('a')

@@ -50,17 +50,26 @@ class PriorityQueue:
 		self._size += 1
 		self.shift_up()
 
+	def push(self,value,priority=0):
+		self.enqueue(value,priority)
+		
 	def dequeue(self):
 		highest = None
-		if self._size > 0:
+		if self._size > 1:
 			highest = self._values[0]
 			end = self._values.pop()
 			self._values[0] = end
 			self._size -= 1
 			self.shift_down()
-
+		elif self._size == 1:
+			highest = self._values.pop()
+			self._size = 0
+		
 		return highest
-
+	
+	def pop(self):
+		return self.dequeue()
+	
 	def shift_down(self):
 		idx = 0
 		while True:

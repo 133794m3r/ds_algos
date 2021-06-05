@@ -24,7 +24,7 @@ class MaxBinaryHeap{
 		const heapSize = this._size;
 		while (idx < heapSize){
 			let swapIdx = idx;
-			let left = (idx << 1) + 1;
+			let left = (idx << 1);
 			let right = left+1;
 			if(left < heapSize && this._values[left] < el)
 				swapIdx = left;

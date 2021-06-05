@@ -19,9 +19,9 @@ class MaxBinaryHeap:
 		heap_size = self._size
 		while idx < heap_size:
 			swap_id = idx
-			left = (idx << 1) + 1
+			left = (idx << 1)
 			right = left+1
-			if left < self._size and  self._values[left] < el:
+			if left < self._size and  self._values[left] < self._values[idx]:
 				swap_id = left
 			if right < self._size and self._values[swap_id] < self._values[right]:
 				swap_id = right
@@ -38,13 +38,16 @@ class MaxBinaryHeap:
 
 	def extract_max(self):
 		removed = None
-		if self._size > 0:
+		if self._size > 1:
 			removed = self._values[0]
 			end = self._values.pop()
 			self._values[0] = end
 			self._size -= 1
 			self.shift_down()
-		
+		#have to handle this edge case.
+		elif self._size == 1:
+			removed = self._values.pop()
+			self._size = 0
 		return removed
 
 	def get_max(self):

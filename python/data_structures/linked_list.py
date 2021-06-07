@@ -135,7 +135,7 @@ class LinkedList:
 			self._length -= 1
 			if self._length == 0:
 				self._tail = None
-			return tmp;
+			return tmp
 		else:
 			return None
 

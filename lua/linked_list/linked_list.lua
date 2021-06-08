@@ -8,6 +8,10 @@ Methods
 Note: The indexes are based on 1 as this is lua
 ]]
 
+--[[
+]]
+
+-- Linked List Class
 LinkedList = Class{}
 
 function LinkedList:init()
@@ -21,6 +25,8 @@ function LinkedList:init()
 	self._tail = nil
 end
 
+-- Get Method
+-- @param idx The index of the item to get
 function LinkedList:get(idx)
 	if idx < 1 or idx > self._length then
 		return nil
@@ -29,12 +35,13 @@ function LinkedList:get(idx)
 	local cur = self._head
 
 	for i=1,idx-1 do
-		print(cur.value)
 		cur = cur.next
 	end
 	return cur
 end
 
+
+-- Adds a value to the end of the list
 function LinkedList:push(value)
 	if self._head == nil then
 		self._head = self.Node(value)
@@ -50,6 +57,7 @@ function LinkedList:push(value)
 	self._length = self._length +  1
 end
 
+-- Removes an item from the end of the list or the one given by the index
 function LinkedList:pop(idx)
 	if self._head == nil then
 		return nil
@@ -63,7 +71,6 @@ function LinkedList:pop(idx)
 		popped = self._tail.value
 		if self._length > 1 then
 			local prev = self:get(self._length-1)
-			print_r(prev)
 			self._tail = prev
 			self._tail.next = nil
 		else
@@ -74,6 +81,8 @@ function LinkedList:pop(idx)
 	return popped
 end
 
+
+-- reverse the list in place
 function LinkedList:reverse()
 	local cur = self._head
 	self._head = self._tail
@@ -89,6 +98,8 @@ function LinkedList:reverse()
 	self._head = prev
 end
 
+
+-- insert a value at specified index
 function LinkedList:insert(idx,value)
 	if 1 > idx or idx > self._length then
 		return nil
@@ -98,6 +109,8 @@ function LinkedList:insert(idx,value)
 	self._length = self._length + 1
 end
 
+
+-- change the value of the node at the given index to the value given
 function LinkedList:set(idx,value)
 	if idx < 1 or idx > self._length then
 		return nil
@@ -106,10 +119,13 @@ function LinkedList:set(idx,value)
 	Node.value = value
 end
 
+
+-- get the length of the list
 function LinkedList:len()
 	return self._length
 end
 
+-- remove the head node
 function LinkedList:shift()
 	if self._head then
 		local tmp = self._head
@@ -124,6 +140,7 @@ function LinkedList:shift()
 	end
 end
 
+-- remove an item at the given index
 function LinkedList:remove(idx)
 	if 1 < idx or idx > self._length then
 		return nil
@@ -140,6 +157,7 @@ function LinkedList:remove(idx)
 	end
 end
 
+-- add an element to list before the current head
 function LinkedList:unshift(value)
 	if self._head then
 		self._head = self.Node(value, self._head)
@@ -149,6 +167,7 @@ function LinkedList:unshift(value)
 	end
 end
 
+-- convert it into a normal "list"
 function LinkedList:stringify()
 	local os = '['
 	local cur = self._head
@@ -178,4 +197,6 @@ if not pcall(debug.getlocal,4,1) then
 	print(ll:stringify())
 	-- nil test
 	print(ll:get(0))
+	ll:reverse()
+	print(ll:stringify())
 end

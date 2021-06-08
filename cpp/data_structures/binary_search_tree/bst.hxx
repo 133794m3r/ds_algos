@@ -175,7 +175,7 @@ template <typename T> class BinarySearchTree {
 		if(!node){
 			return 0;
 		}
-		if(! (node->left && node->right)){
+		if(! (node->left || node->right)){
 			if(node == root_){
 				root_ = nullptr;
 			}

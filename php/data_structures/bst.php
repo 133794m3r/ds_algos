@@ -99,7 +99,7 @@ class BinarySearchTree {
 	private function remove_($node, $key){
 		if($node === null)
 			return null;
-		if(! ($node->left && $node->right)){
+		if(! ($node->left || $node->right)){
 			if($node->left === $node->right){
 				if($node === $this->root_)
 					$this->root_ = null;

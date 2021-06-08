@@ -4,6 +4,9 @@ class BinarySearchTree:
 			self.value = value
 			self.left = left
 			self.right = right
+		def __repr__(self):
+			return f'{self.value} l->{self.left} r->{self.right}'
+		
 	_root = None
 	def __init__(self):
 		self._root = None
@@ -70,10 +73,11 @@ class BinarySearchTree:
 	def _remove(self, node, key):
 		if node is None:
 			return None
-		if not (node.left or node.right):
+		if (node.left == None) and (node.left == node.right):
 			if node == self._root:
 				self._root = None
-			del node
+				return None
+
 			return None
 		if key < node.value:
 			node.left = self._remove(node.left, key)
@@ -82,13 +86,14 @@ class BinarySearchTree:
 		else:
 			if self._height(node.left) > self._height(node.right):
 				q = node.left
-				while q and (node.right is not None):
+				while q.right and (node.right is not None):
 					q = q.right
 				node.value = q.value
 				node.left = self._remove(node.left, q.value)
 			else:
 				q = node.right
-				while q and (node.left is not None):
+				print(q, node.left)				
+				while q.left and (node.left is not None):
 					q = q.left
 
 				node.value = q.value
@@ -147,6 +152,7 @@ class BinarySearchTree:
 
 if __name__ == '__main__':
 	bst1 = BinarySearchTree()
+	"""
 	bst1.insert(3)
 	bst1.insert(4)
 	bst1.insert(5)
@@ -164,3 +170,11 @@ if __name__ == '__main__':
 	print(bst1.find(3))
 	print(bst1.get_height())
 	print("pre order -- after removal",bst1.pre_order())
+	"""
+	bst1.insert(7)
+	bst1.insert(6)
+	bst1.insert(4)
+	bst1.insert(5)
+	bst1.insert(3)
+	bst1.remove(3)
+	print(bst1.in_order())

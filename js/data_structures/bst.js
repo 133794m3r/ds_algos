@@ -121,7 +121,7 @@ class BinarySearchTree{
 	_remove(node,key){
 		if(!node)
 			return null
-		if(! (node.left || node.right) ){
+		if(node.left === null and (node.left ===node.right) ){
 			if(node === this._root){
 				this._root = null;
 			}

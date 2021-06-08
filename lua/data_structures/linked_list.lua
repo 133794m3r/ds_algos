@@ -141,6 +141,7 @@ function LinkedList:shift()
 end
 
 -- remove an item at the given index
+-- @param idx The index
 function LinkedList:remove(idx)
 	if 1 < idx or idx > self._length then
 		return nil
@@ -177,7 +178,6 @@ function LinkedList:stringify()
 	end
 	return os .. tostring(cur.value) .. "]"
 end
-
 if not pcall(debug.getlocal,4,1) then
 	ll = LinkedList()
 	ll:push(1)

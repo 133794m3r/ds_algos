@@ -70,7 +70,7 @@ class BinarySearchTree:
 	def _remove(self, node, key):
 		if node is None:
 			return None
-		if not (node.left and node.right):
+		if not (node.left or node.right):
 			if node == self._root:
 				self._root = None
 			del node
@@ -109,8 +109,10 @@ class BinarySearchTree:
 
 	def pre_traverse(self,data, node):
 		data.append(node.value)
-		if node.left: self.pre_traverse(data, node.left)
-		if node.right: self.pre_traverse(data, node.right)
+		if node.left:
+			self.pre_traverse(data, node.left)
+		if node.right:
+			self.pre_traverse(data, node.right)
 
 	def in_traverse(self, data, node):
 		if node.left: self.in_traverse(data, node.left)
@@ -145,12 +147,12 @@ class BinarySearchTree:
 
 if __name__ == '__main__':
 	bst1 = BinarySearchTree()
-	bst1.insert(10)
-	bst1.insert(6)
-	bst1.insert(15)
 	bst1.insert(3)
+	bst1.insert(4)
+	bst1.insert(5)
+	bst1.insert(6)
+	bst1.insert(7)
 	bst1.insert(8)
-	bst1.insert(20)
 	tmp = bst1.bfs()
 	print("bfs",tmp)
 	dfs = bst1.pre_order()

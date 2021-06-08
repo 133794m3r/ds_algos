@@ -9,7 +9,7 @@ class MaxBinaryHeap:
 		while idx > 0:
 			parent_idx = (idx -1) >> 1
 			parent = self._values[parent_idx]
-			if item <= parent: break
+			if item >= parent: break
 			self._values[parent_idx], self._values[idx] = item, parent
 			idx = parent_idx
 
@@ -65,5 +65,6 @@ if __name__ == "__main__":
 	heap.insert(27)
 	heap.insert(12)
 	heap.insert(55)
+	print(heap._values)
 	print(heap.extract_max())
 	print(heap.get_max())

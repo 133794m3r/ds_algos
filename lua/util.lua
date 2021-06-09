@@ -34,3 +34,6 @@ function print_r (t)
 	print()
 end
 Class = require 'class'
+
+-- figure out if we have bit or bit32
+bit = bit32 or bit

@@ -109,7 +109,7 @@ function BinarySearchTree:height()
 end
 
 -- get height from the given node
-function BinarySearchTree:get_height(node)
+function BinarySearchTree:getHeight(node)
 	return self._height(node)
 end
 
@@ -133,47 +133,47 @@ function BinarySearchTree:bfs()
 	return data
 end
 
-function BinarySearchTree:pre_traverse(data,node)
+function BinarySearchTree:preTraverse(data, node)
 	table.insert(data,node.value)
-	if node.left then self:pre_traverse(data,node.left) end
-	if node.right then self:pre_traverse(data,node.right) end
+	if node.left then self:preTraverse(data,node.left) end
+	if node.right then self:preTraverse(data,node.right) end
 end
 
-function BinarySearchTree:in_traverse(data,node)
-	if node.left then self:in_traverse(data,node.left) end
+function BinarySearchTree:inTraverse(data, node)
+	if node.left then self:inTraverse(data,node.left) end
 	table.insert(data,node.value)
-	if node.right then self:in_traverse(data, node.right) end
+	if node.right then self:inTraverse(data, node.right) end
 end
 
-function BinarySearchTree:post_traverse(data,node)
-	if node.left then self:post_traverse(data,node.left) end
-	if node.right then self:post_traverse(data, node.right) end
+function BinarySearchTree:postTraverse(data, node)
+	if node.left then self:postTraverse(data,node.left) end
+	if node.right then self:postTraverse(data, node.right) end
 	table.insert(data, node.value)
 end
 
-function BinarySearchTree:pre_order()
+function BinarySearchTree:preOrder()
 	local cur = self._root
 	local data = {}
 	if cur ~= nil then
-		self:pre_traverse(data,cur)
+		self:preTraverse(data,cur)
 	end
 	return data
 end
 
-function BinarySearchTree:in_order()
+function BinarySearchTree:inOrder()
 	local cur = self._root
 	local data = {}
 	if cur ~= nil then
-		self:in_traverse(data,cur)
+		self:inTraverse(data,cur)
 	end
 	return data
 end
 
-function BinarySearchTree:post_order()
+function BinarySearchTree:postOrder()
 	local cur = self._root
 	local data = {}
 	if cur ~= nil then
-		self:post_traverse(data,cur)
+		self:postTraverse(data,cur)
 	end
 	return data
 end
@@ -228,8 +228,8 @@ if not pcall(debug.getlocal,4,1) then
 	bst:insert(4)
 	bst:insert(5)
 	bst:insert(3)
-	print_r(bst:in_order())
+	print_r(bst:inOrder())
 	bst:remove(3)
 	print_r(bst)
-	print_r(bst:in_order())
+	print_r(bst:inOrder())
 end

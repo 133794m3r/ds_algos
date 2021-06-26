@@ -181,6 +181,7 @@ function test(){
 	else{
 		console.log(`We got ${ll.toString()} but we expected ${expected}.`)
 	}
+	ll.display();
 }
 if (typeof module !== 'undefined' && require.main === module) {
 	test();

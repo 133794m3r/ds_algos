@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+	"outDir": "./built",
+	"allowJs": true,
+	"checkJs": true,
+	"strict": true,
+	"noFallthroughCasesInSwitch": true
+  },
+  "include": [",./ts/**/*"],
+}

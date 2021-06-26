@@ -91,8 +91,7 @@ class BinarySearchTree:
 				node.value = q.value
 				node.left = self._remove(node.left, q.value)
 			else:
-				q = node.right
-				print(q, node.left)				
+				q = node.right		
 				while q.left and (node.left is not None):
 					q = q.left
 

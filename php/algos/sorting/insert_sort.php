@@ -9,6 +9,7 @@ function insert_sort(&$arr){
 		$arr[$j+1] = $cur;
 	}
 }
-$arr = [3,2,1,4];
+$arr = [3,2,1,6,9,7];
 insert_sort($arr);
 print_r($arr);
+
